@@ -1,4 +1,4 @@
-## ---- include=FALSE-----------------------------------------------------------
+## ----include=FALSE------------------------------------------------------------
 library(SAMprior)
 library(knitr)
 knitr::opts_chunk$set(
@@ -27,7 +27,7 @@ dat <- data.frame(study = c(1,2,3),
                   se = round(c(std(df_1), std(df_2), std(df_3)), 3))
 kable(dat)
 
-## ---- message=FALSE-----------------------------------------------------------
+## ----message=FALSE------------------------------------------------------------
 sigma = 3
 # load R packages
 library(ggplot2)
@@ -43,7 +43,7 @@ map_automix <- automixfit(map_mcmc)
 map_automix
 plot(map_automix)$mix
 
-## ---- message=FALSE-----------------------------------------------------------
+## ----message=FALSE------------------------------------------------------------
 set.seed(234)
 sigma        <- 3 ## Standard deviation in the current trial
 data.crt     <- rnorm(30, mean = 0.4, sd = sigma)
@@ -52,7 +52,7 @@ wSAM <- SAM_weight(if.prior = map_automix,
                    data = data.crt)
 cat('SAM weight: ', wSAM)
 
-## ---- message=FALSE-----------------------------------------------------------
+## ----message=FALSE------------------------------------------------------------
 wSAM <- SAM_weight(if.prior = map_automix, 
                    delta = 0.5 * sigma,
                    method.w = 'PPR',
@@ -60,7 +60,7 @@ wSAM <- SAM_weight(if.prior = map_automix,
                    data = data.crt)
 cat('SAM weight: ', wSAM)
 
-## ---- echo=FALSE, message=FALSE, warning=FALSE--------------------------------
+## ----echo=FALSE, message=FALSE, warning=FALSE---------------------------------
 weight_grid <- seq(-3, 3, by = 0.3)
 weight_res  <- lapply(weight_grid, function(x){
   res <- c()
@@ -79,14 +79,14 @@ qplot(grid, weight, data = df_weight, geom = "line", main= "SAM Weight") +
   xlab('Sample mean from control trial')+ ylab('Weight') +
   geom_vline(xintercept = summary(map_automix)['mean'], linetype = 2, col = 'blue') 
 
-## ---- message=FALSE-----------------------------------------------------------
+## ----message=FALSE------------------------------------------------------------
 unit_prior <- mixnorm(nf.prior = c(1, summary(map_automix)['mean'], sigma))
 SAM.prior <- SAM_prior(if.prior = map_automix, 
                        nf.prior = unit_prior,
                        weight = wSAM, sigma = sigma)
 SAM.prior
 
-## ---- message=FALSE-----------------------------------------------------------
+## ----message=FALSE------------------------------------------------------------
 set.seed(123)
 # weak_prior <- mixnorm(c(1, summary(map_automix)[1], 1e4))
 TypeI <- get_OC(if.prior = map_automix,    ## MAP prior from historical data
@@ -105,7 +105,7 @@ TypeI <- get_OC(if.prior = map_automix,    ## MAP prior from historical data
                   )
 kable(TypeI)
 
-## ---- message=FALSE-----------------------------------------------------------
+## ----message=FALSE------------------------------------------------------------
 set.seed(123)
 Power <- get_OC(if.prior = map_automix,    ## MAP prior based on historical data
                 nf.prior = unit_prior,     ## Non-informative prior for treatment arm
@@ -123,7 +123,7 @@ Power <- get_OC(if.prior = map_automix,    ## MAP prior based on historical data
                   )
 kable(Power)
 
-## ---- message=FALSE-----------------------------------------------------------
+## ----message=FALSE------------------------------------------------------------
 ## Simulate data for treatment arm
 data.trt <- rnorm(60, mean = 3, sd = sigma)
 

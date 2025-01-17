@@ -88,7 +88,7 @@ and robust MAP prior.}
 \item{n.t}{Sample size for the treatment arm.}
 
 \item{decision}{Decision rule to compare the treatment with the control;
-see \code{\link{decision2S}}.}
+see \code{\link[RBesT]{decision2S}}.}
 
 \item{ntrial}{Number of trials simulated.}
 
@@ -138,7 +138,7 @@ the MES of using a non-informative prior.
 
 To evaluate type I error and power, the determination of whether the
 treatment is superior to the control is calculated based on function
- \code{\link{decision2S}}.
+ \code{\link[RBesT]{decision2S}}.
 }
 \section{Methods (by class)}{
 \itemize{
@@ -212,8 +212,7 @@ prior.se   <- sigma/sqrt(100)
 \references{
 Yang P, Zhao Y, Nie L, Vallejo J, Yuan Y.
 SAM: Self-adapting mixture prior to dynamically borrow information from
-historical data in clinical trials. \emph{Biometrics} 2023; 00, 1–12.
-https://doi.org/10.1111/biom.13927
+historical data in clinical trials. \emph{Biometrics} 2023; 79(4), 2857-2868.
 
 Schmidli H, Gsteiger S, Roychoudhury S, O'Hagan A, Spiegelhalter D, Neuenschwander B.
 Robust meta-analytic-predictive priors in clinical trials with historical control information.

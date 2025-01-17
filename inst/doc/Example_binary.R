@@ -1,4 +1,4 @@
-## ---- include=FALSE-----------------------------------------------------------
+## ----include=FALSE------------------------------------------------------------
 library(SAMprior)
 library(knitr)
 knitr::opts_chunk$set(
@@ -40,14 +40,14 @@ map_automix <- automixfit(map_ASAS20)
 map_automix
 plot(map_automix)$mix
 
-## ---- message=FALSE-----------------------------------------------------------
+## ----message=FALSE------------------------------------------------------------
 n <- 35; r = 10 
 wSAM <- SAM_weight(if.prior = map_automix, 
                    delta = 0.2,
                    n = n, r = r)
 cat('SAM weight: ', wSAM)
 
-## ---- message=FALSE-----------------------------------------------------------
+## ----message=FALSE------------------------------------------------------------
 wSAM <- SAM_weight(if.prior = map_automix, 
                    delta = 0.2,
                    method.w = 'PPR',
@@ -55,7 +55,7 @@ wSAM <- SAM_weight(if.prior = map_automix,
                    n = n, r = r)
 cat('SAM weight: ', wSAM)
 
-## ---- echo=FALSE, message=FALSE-----------------------------------------------
+## ----echo=FALSE, message=FALSE------------------------------------------------
 weight_grid <- seq(1, 34, by = 1)
 weight_res  <- lapply(1:34, function(x) SAM_weight(if.prior = map_automix, 
                                                    delta = 0.2,
@@ -66,13 +66,13 @@ qplot(grid, weight, data = df_weight, geom = "line", main= "SAM Weight") +
   xlab('Response Rate from Control trial')+ ylab('Weight') +
   geom_vline(xintercept = summary(map_automix)['mean'], linetype = 2, col = 'blue') 
 
-## ---- message=FALSE-----------------------------------------------------------
+## ----message=FALSE------------------------------------------------------------
 SAM.prior <- SAM_prior(if.prior = map_automix, 
                        nf.prior = mixbeta(nf.prior = c(1,1,1)),
                        weight = wSAM)
 SAM.prior
 
-## ---- message=FALSE-----------------------------------------------------------
+## ----message=FALSE------------------------------------------------------------
 set.seed(123)
 TypeI <- get_OC(if.prior = map_automix,       ## MAP prior from historical data
                 nf.prior = mixbeta(c(1,1,1)), ## Non-informative prior for treatment arm
@@ -91,7 +91,7 @@ TypeI <- get_OC(if.prior = map_automix,       ## MAP prior from historical data
                   )
 kable(TypeI)
 
-## ---- message=FALSE-----------------------------------------------------------
+## ----message=FALSE------------------------------------------------------------
 set.seed(123)
 Power <- get_OC(if.prior = map_automix,       ## MAP prior from historical data
                 nf.prior = mixbeta(c(1,1,1)), ## Non-informative prior for treatment arm
